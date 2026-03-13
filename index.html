@@ -6,64 +6,65 @@
 <title>Skrining Kondisi Psikologis Pegawai — Biro SDM Setneg RI</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: 'Georgia', serif; background: #f8fafc; color: #1e293b; min-height: 100vh; }
+  body { font-family: 'Georgia', serif; background: #EEF6FB; color: #1a3a5c; min-height: 100vh; }
 
   /* ── INTRO ── */
   #page-intro {
     min-height: 100vh;
-    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 50%, #312e81 100%);
+    background: linear-gradient(150deg, #0a2240 0%, #1a4a7a 55%, #1a6a9a 100%);
     display: flex; align-items: center; justify-content: center; padding: 24px;
   }
   .intro-card {
     max-width: 540px; width: 100%;
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.10);
+    backdrop-filter: blur(24px);
+    border: 1px solid rgba(212,175,55,0.35);
     border-radius: 24px; padding: 44px 36px; color: #fff;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), inset 0 1px 0 rgba(212,175,55,0.2);
   }
   .intro-brand { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
-  .intro-logo {
-    width:52px; height:52px; object-fit:contain; filter:brightness(0) invert(1);
-  }
+  .intro-logo { width:52px; height:52px; object-fit:contain; filter:brightness(0) invert(1); }
   .intro-brand-texts {}
-  .intro-brand-main { font-size:13px; font-weight:700; color:#e2e8f0; line-height:1.3; }
-  .intro-brand-sub  { font-size:11px; color:#94a3b8; letter-spacing:0.5px; }
-  .intro-title { font-size:26px; font-weight:800; margin-bottom:10px; line-height:1.25; }
-  .intro-desc { color:#94a3b8; font-size:14px; line-height:1.7; margin-bottom:28px; }
-  .intro-notices { background:rgba(255,255,255,0.07); border-radius:12px; padding:16px 20px; margin-bottom:28px; }
-  .intro-notice { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; font-size:13px; color:#cbd5e1; }
+  .intro-brand-main { font-size:13px; font-weight:700; color:#f0e6b0; line-height:1.3; }
+  .intro-brand-sub  { font-size:11px; color:#90bcd8; letter-spacing:0.5px; }
+  .intro-title { font-size:26px; font-weight:800; margin-bottom:10px; line-height:1.25; color:#fff; }
+  .intro-desc { color:#a8cce0; font-size:14px; line-height:1.7; margin-bottom:28px; }
+  .intro-notices { background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.2); border-radius:12px; padding:16px 20px; margin-bottom:28px; }
+  .intro-notice { display:flex; gap:12px; align-items:flex-start; margin-bottom:10px; font-size:13px; color:#c8e4f4; }
   .intro-notice:last-child { margin-bottom:0; }
-  .field-label { font-size:12px; font-weight:600; color:#94a3b8; margin-bottom:5px; }
+  .field-label { font-size:12px; font-weight:700; color:#d4af37; margin-bottom:5px; letter-spacing:0.3px; }
   .field-input {
-    width:100%; background:rgba(255,255,255,0.09);
-    border:1px solid rgba(255,255,255,0.15); border-radius:8px;
+    width:100%; background:rgba(255,255,255,0.10);
+    border:1px solid rgba(212,175,55,0.3); border-radius:8px;
     padding:10px 14px; color:#fff; font-size:14px; outline:none;
     font-family:inherit; margin-bottom:12px; transition:border 0.2s;
   }
-  .field-input:focus { border-color:rgba(255,255,255,0.4); }
-  .field-input::placeholder { color:#64748b; }
+  .field-input:focus { border-color:#d4af37; box-shadow:0 0 0 3px rgba(212,175,55,0.15); }
+  .field-input::placeholder { color:#6a9ab8; }
   .btn-start {
     width:100%; padding:14px; border:none; border-radius:12px;
     font-size:15px; font-weight:700; cursor:pointer; transition:all 0.2s;
-    color:#fff; font-family:inherit;
+    color:#1a3a5c; font-family:inherit;
   }
-  .btn-start:enabled  { background: linear-gradient(135deg,#2563eb,#7c3aed); }
-  .btn-start:disabled { background:#334155; cursor:not-allowed; }
+  .btn-start:enabled  { background: linear-gradient(135deg,#d4af37,#f0d060); box-shadow:0 4px 16px rgba(212,175,55,0.4); }
+  .btn-start:enabled:hover { background: linear-gradient(135deg,#e0c040,#f8e070); }
+  .btn-start:disabled { background:rgba(255,255,255,0.12); color:#6a9ab8; cursor:not-allowed; }
 
   /* ── FORM ── */
-  #page-form { display:none; min-height:100vh; background:#f8fafc; padding-bottom:80px; }
+  #page-form { display:none; min-height:100vh; background:#EEF6FB; padding-bottom:80px; }
   .form-header {
-    background:#fff; border-bottom:1px solid #e2e8f0;
+    background:#fff; border-bottom:2px solid #d4af37;
     padding:14px 20px; position:sticky; top:0; z-index:10;
+    box-shadow:0 2px 12px rgba(26,58,92,0.08);
   }
   .form-header-inner { max-width:680px; margin:0 auto; }
   .form-header-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; }
   .section-label-hdr { font-size:13px; font-weight:700; }
-  .section-count { font-size:12px; color:#94a3b8; }
-  .progress-bar-wrap { height:6px; background:#e2e8f0; border-radius:99px; margin-bottom:8px; }
+  .section-count { font-size:12px; color:#7aacc8; }
+  .progress-bar-wrap { height:6px; background:#d0e8f4; border-radius:99px; margin-bottom:8px; }
   .progress-bar-fill {
     height:100%; border-radius:99px;
-    background:linear-gradient(90deg,#1F4E79,#7030A0);
+    background:linear-gradient(90deg,#d4af37,#1a6a9a);
     transition:width 0.4s ease;
   }
   .section-tabs { display:flex; gap:6px; }
@@ -71,84 +72,88 @@
 
   .form-body { max-width:680px; margin:0 auto; padding:24px 16px 0; }
   .section-banner { border-radius:16px; padding:22px 24px; margin-bottom:20px; color:#fff; }
-  .section-banner-tag   { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; opacity:.7; margin-bottom:6px; }
+  .section-banner-tag   { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; opacity:.8; margin-bottom:6px; }
   .section-banner-title { font-size:19px; font-weight:800; margin-bottom:4px; }
-  .section-banner-sub   { font-size:13px; opacity:.85; line-height:1.5; margin-bottom:12px; }
+  .section-banner-sub   { font-size:13px; opacity:.9; line-height:1.5; margin-bottom:12px; }
   .scale-chips { display:flex; gap:6px; flex-wrap:wrap; }
-  .scale-chip  { background:rgba(255,255,255,0.15); font-size:11px; padding:3px 8px; border-radius:6px; }
+  .scale-chip  { background:rgba(255,255,255,0.18); font-size:11px; padding:3px 8px; border-radius:6px; }
 
   .question-card {
-    background:#fff; border-radius:14px; border:1px solid #e2e8f0;
+    background:#fff; border-radius:14px; border:1px solid #c8e0f0;
     padding:18px 20px; margin-bottom:12px; transition:border-color 0.2s;
+    box-shadow:0 1px 4px rgba(26,58,92,0.05);
   }
-  .question-text { font-size:14px; font-weight:600; color:#1e293b; margin-bottom:14px; line-height:1.5; }
+  .question-text { font-size:14px; font-weight:600; color:#1a3a5c; margin-bottom:14px; line-height:1.5; }
   .question-num  { font-weight:800; margin-right:8px; }
   .answer-btns   { display:flex; gap:8px; flex-wrap:wrap; }
   .answer-btn {
     flex:1 1 auto; min-width:70px; padding:8px 6px; border-radius:8px;
-    border:2px solid #e2e8f0; background:#f8fafc; color:#64748b;
+    border:2px solid #c8e0f0; background:#f4fafd; color:#4a7a9a;
     font-size:12px; cursor:pointer; transition:all 0.15s;
     font-family:inherit; text-align:center;
   }
-  .answer-btn.selected { color:#fff; }
-  .answer-btn-score { font-weight:800; font-size:15px; display:block; }
+  .answer-btn.selected { color:#1a3a5c; border-color:#d4af37; background:#fdf6dc; }
+  .answer-btn-score { font-weight:800; font-size:15px; display:block; color:#d4af37; }
   .answer-btn-label { font-size:10px; line-height:1.2; display:block; margin-top:2px; }
 
   .form-nav { display:flex; gap:12px; margin-top:8px; }
   .btn-back {
-    flex:1; padding:14px; background:#fff; border:2px solid #e2e8f0;
+    flex:1; padding:14px; background:#fff; border:2px solid #c8e0f0;
     border-radius:12px; font-size:14px; font-weight:600; cursor:pointer;
-    color:#64748b; font-family:inherit;
+    color:#4a7a9a; font-family:inherit;
   }
   .btn-next {
     flex:2; padding:14px; border:none; border-radius:12px;
-    font-size:14px; font-weight:700; cursor:pointer; color:#fff;
-    font-family:inherit; transition:all 0.2s;
+    font-size:14px; font-weight:700; cursor:pointer;
+    color:#1a3a5c; font-family:inherit; transition:all 0.2s;
   }
-  .btn-next:disabled { background:#e2e8f0; color:#94a3b8; cursor:not-allowed; }
+  .btn-next:disabled { background:#d0e8f4; color:#7aacc8; cursor:not-allowed; }
 
   /* ── RESULT ── */
-  #page-result { display:none; min-height:100vh; background:#f8fafc; padding:24px 16px; }
+  #page-result { display:none; min-height:100vh; background:#EEF6FB; padding:24px 16px; }
   .result-inner { max-width:600px; margin:0 auto; }
   .result-hero {
-    background:linear-gradient(135deg,#0f172a,#1e3a5f);
+    background: linear-gradient(150deg,#0a2240 0%,#1a4a7a 55%,#1a6a9a 100%);
     border-radius:20px; padding:32px 28px; color:#fff;
     margin-bottom:20px; text-align:center;
+    border:1px solid rgba(212,175,55,0.3);
+    box-shadow:0 8px 32px rgba(10,34,64,0.25);
   }
   .result-hero-logo { width:56px; height:56px; object-fit:contain; filter:brightness(0) invert(1); margin-bottom:12px; }
-  .result-hero-title { font-size:22px; font-weight:800; margin-bottom:6px; }
-  .result-hero-name  { color:#94a3b8; font-size:13px; }
-  .result-hero-date  { color:#64748b; font-size:12px; margin-top:4px; }
+  .result-hero-title { font-size:22px; font-weight:800; margin-bottom:6px; color:#f0e6b0; }
+  .result-hero-name  { color:#90bcd8; font-size:13px; }
+  .result-hero-date  { color:#6a9ab8; font-size:12px; margin-top:4px; }
 
   .score-card {
     background:#fff; border-radius:16px; padding:20px 22px;
-    margin-bottom:14px; border:2px solid transparent;
+    margin-bottom:14px; border:2px solid #c8e0f0;
+    box-shadow:0 2px 8px rgba(26,58,92,0.06);
   }
   .score-card-top  { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
   .score-card-tag  { font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
-  .score-card-name { font-size:15px; font-weight:700; color:#1e293b; }
-  .score-num  { font-size:28px; font-weight:800; line-height:1; }
-  .score-max  { font-size:11px; color:#94a3b8; }
-  .score-bar-wrap { height:8px; background:#f1f5f9; border-radius:99px; margin-bottom:10px; }
+  .score-card-name { font-size:15px; font-weight:700; color:#1a3a5c; }
+  .score-num  { font-size:28px; font-weight:800; line-height:1; color:#d4af37; }
+  .score-max  { font-size:11px; color:#7aacc8; }
+  .score-bar-wrap { height:8px; background:#d0e8f4; border-radius:99px; margin-bottom:10px; }
   .score-bar-fill { height:100%; border-radius:99px; transition:width 1s ease; }
   .score-badge { display:inline-block; font-weight:700; font-size:13px; padding:3px 10px; border-radius:99px; margin-bottom:8px; }
-  .score-desc  { font-size:13px; color:#475569; line-height:1.5; }
+  .score-desc  { font-size:13px; color:#2a5a7c; line-height:1.5; }
 
   .result-note { border-radius:16px; padding:18px 22px; margin-bottom:14px; border:1px solid transparent; }
   .result-note-title { font-weight:700; font-size:14px; margin-bottom:6px; }
-  .result-note-text  { font-size:13px; color:#475569; line-height:1.6; }
+  .result-note-text  { font-size:13px; color:#2a5a7c; line-height:1.6; }
   .result-disclaimer {
-    background:#fff; border:1px solid #e2e8f0; border-radius:12px;
-    padding:14px 18px; margin-bottom:20px; font-size:11px; color:#94a3b8; line-height:1.6;
+    background:#fff; border:1px solid #c8e0f0; border-radius:12px;
+    padding:14px 18px; margin-bottom:20px; font-size:11px; color:#7aacc8; line-height:1.6;
   }
   .btn-reset {
-    width:100%; padding:14px; background:#1e293b; color:#fff;
+    width:100%; padding:14px; background:linear-gradient(135deg,#0a2240,#1a4a7a); color:#fff;
     border:none; border-radius:12px; font-size:14px; font-weight:600;
     cursor:pointer; font-family:inherit;
   }
   .print-btn {
-    width:100%; padding:12px; background:#fff; color:#475569;
-    border:1px solid #e2e8f0; border-radius:12px; font-size:13px; font-weight:600;
+    width:100%; padding:12px; background:#fff; color:#1a4a7a;
+    border:2px solid #d4af37; border-radius:12px; font-size:13px; font-weight:600;
     cursor:pointer; font-family:inherit; margin-bottom:10px;
   }
 
@@ -189,15 +194,99 @@
     <div class="field-label">NIP</div>
     <input class="field-input" id="inp-nip" type="text" placeholder="Nomor Induk Pegawai" oninput="checkIntro()">
     <div class="field-label">Unit Kerja</div>
-    <div style="position:relative;margin-bottom:0;">
-      <input class="field-input" id="inp-unit-search" type="text"
-        placeholder="Ketik untuk mencari unit kerja..."
-        oninput="filterUnit()" onfocus="showUnitDrop()" autocomplete="off"
-        style="margin-bottom:0;padding-right:36px;">
-      <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#94a3b8;pointer-events:none;font-size:12px;">▾</span>
-      <div id="unit-dropdown" style="display:none;position:absolute;top:calc(100% + 4px);left:0;right:0;background:#1a2744;border:1px solid rgba(255,255,255,0.18);border-radius:10px;max-height:210px;overflow-y:auto;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.4);"></div>
-    </div>
-    <input type="hidden" id="inp-unit">
+    <input class="field-input" id="inp-unit" type="text"
+      list="unit-list"
+      placeholder="Ketik untuk mencari unit kerja..."
+      oninput="checkIntro()" autocomplete="off"
+      style="margin-bottom:12px;">
+    <datalist id="unit-list">
+      <option value="Biro Perencanaan, Sekretariat Kementerian">
+      <option value="Biro Keuangan, Sekretariat Kementerian">
+      <option value="Biro Tata Usaha dan Dukungan Pimpinan, Sekretariat Kementerian">
+      <option value="Biro Kerja Sama Teknik Luar Negeri, Sekretariat Kementerian">
+      <option value="Biro Hubungan Masyarakat, Sekretariat Kementerian">
+      <option value="Biro Pengelolaan Barang Milik Negara dan Pengadaan Barang dan Jasa, Sekretariat Kementerian">
+      <option value="Biro Umum, Sekretariat Kementerian">
+      <option value="Biro Administrasi, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden">
+      <option value="Biro Pengelolaan Istana, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden">
+      <option value="Biro Umum, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden">
+      <option value="Biro Protokol, Deputi Bidang Protokol, Pers, dan Media, Sekretariat Presiden">
+      <option value="Biro Pers, Media, dan Informasi, Deputi Bidang Protokol, Pers, dan Media, Sekretariat Presiden">
+      <option value="Istana Kepresidenan Bogor, Sekretariat Presiden">
+      <option value="Istana Kepresidenan Cipanas, Sekretariat Presiden">
+      <option value="Istana Kepresidenan Yogyakarta, Sekretariat Presiden">
+      <option value="Istana Kepresidenan Tampaksiring, Sekretariat Presiden">
+      <option value="Asisten Deputi Ekonomi, Keuangan, dan Transformasi Digital, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Infrastruktur, Sumber Daya Alam, dan Pembangunan Kewilayahan, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Pengentasan Kemiskinan dan Pembangunan Desa, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Kesehatan, Gizi, dan Pembangunan Keluarga, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Pendidikan, Agama, Kebudayaan, Pemuda, dan Olahraga, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Hubungan Luar Negeri dan Pertahanan, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Politik, Keamanan, Hukum, dan Hak Asasi Manusia, Sekretariat Wakil Presiden">
+      <option value="Asisten Deputi Tata Kelola Pemerintahan dan Percepatan Pembangunan Daerah, Sekretariat Wakil Presiden">
+      <option value="Biro Tata Usaha dan Sumber Daya Manusia, Deputi Bidang Administrasi, Sekretariat Wakil Presiden">
+      <option value="Biro Perencanaan dan Keuangan, Deputi Bidang Administrasi, Sekretariat Wakil Presiden">
+      <option value="Biro Umum, Deputi Bidang Administrasi, Sekretariat Wakil Presiden">
+      <option value="Biro Protokol dan Kerumahtanggaan, Deputi Bidang Administrasi, Sekretariat Wakil Presiden">
+      <option value="Biro Pers, Media, dan Informasi, Deputi Bidang Administrasi, Sekretariat Wakil Presiden">
+      <option value="Biro Personel TNI dan Kepolisian, Sekretariat Militer Presiden">
+      <option value="Biro Pengamanan, Sekretariat Militer Presiden">
+      <option value="Biro Gelar, Tanda Jasa, dan Tanda Kehormatan, Sekretariat Militer Presiden">
+      <option value="Biro Umum, Sekretariat Militer Presiden">
+      <option value="Asisten Deputi Politik, Pemerintahan Dalam Negeri dan Aparatur Negara, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Hukum, HAM, Imigrasi, dan Pemasyarakatan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Hubungan Luar Negeri, Komunikasi, dan Digital, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Pertahanan dan Keamanan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Energi, Sumber Daya Mineral, dan Pariwisata, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Ketenagakerjaan, Investasi, dan Hilirisasi, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Perdagangan dan Perindustrian, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Perencanaan Pembangunan, Fiskal, dan Pengembangan BUMN, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Kesehatan, Kependudukan, Pemuda, dan Olahraga, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Agama, Kebudayaan, Pendidikan, Sains, dan Teknologi, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Sosial, Pekerja Migran, Pemberdayaan Perempuan, dan Perlindungan Anak, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Desa, Pembangunan Daerah Tertinggal, Koperasi, dan UMKM, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Kelautan, Perikanan, dan Kehutanan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Agraria, Tata Ruang, Transmigrasi, dan Lingkungan Hidup, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Pekerjaan Umum, Perumahan, dan Perhubungan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Pertanian, Pangan, dan Gizi, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Penyelenggaraan Persidangan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Pelaporan Persidangan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Naskah dan Penerjemahan, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Dokumentasi, Diseminasi, dan Arsip, Sekretariat Dukungan Kabinet">
+      <option value="Biro Pengelolaan Anggaran, SDM, dan Kinerja, Sekretariat Dukungan Kabinet">
+      <option value="Biro Dukungan Aparatur dan Kelembagaan, Sekretariat Dukungan Kabinet">
+      <option value="Biro Umum, Sekretariat Dukungan Kabinet">
+      <option value="Asisten Deputi Keamanan, Kelembagaan, dan Aparatur, Deputi Bidang Perundang-undangan dan Administrasi Hukum">
+      <option value="Asisten Deputi Politik, Hukum, dan Pemerintahan Dalam Negeri, Deputi Bidang Perundang-undangan dan Administrasi Hukum">
+      <option value="Asisten Deputi Perekonomian, Deputi Bidang Perundang-undangan dan Administrasi Hukum">
+      <option value="Asisten Deputi Kesejahteraan Rakyat, Deputi Bidang Perundang-undangan dan Administrasi Hukum">
+      <option value="Asisten Deputi Administrasi Hukum, Deputi Bidang Perundang-undangan dan Administrasi Hukum">
+      <option value="Asisten Deputi Hubungan Lembaga Negara dan Lembaga Pemerintah, Deputi Bidang Hubungan Kelembagaan">
+      <option value="Asisten Deputi Hubungan Lembaga Non Pemerintah, Deputi Bidang Hubungan Kelembagaan">
+      <option value="Asisten Deputi Pengaduan Masyarakat, Deputi Bidang Hubungan Kelembagaan">
+      <option value="Asisten Deputi Kajian Strategis dan Pengelolaan Kemitraan, Deputi Bidang Hubungan Kelembagaan">
+      <option value="Biro Administrasi Pejabat Negara, Deputi Bidang Administrasi Aparatur">
+      <option value="Biro Administrasi Pejabat Pemerintahan, Deputi Bidang Administrasi Aparatur">
+      <option value="Biro Sumber Daya Manusia, Deputi Bidang Administrasi Aparatur">
+      <option value="Biro Organisasi, Tata Laksana, Hukum, dan Reformasi Birokrasi, Deputi Bidang Administrasi Aparatur">
+      <option value="Pusat Pengembangan dan Layanan Sistem Informasi, Badan Teknologi, Data, dan Informasi">
+      <option value="Pusat Infrastruktur Sistem Jaringan dan Keamanan Siber, Badan Teknologi, Data, dan Informasi">
+      <option value="Pusat Manajemen Data dan Transformasi Digital, Badan Teknologi, Data, dan Informasi">
+      <option value="Inspektorat, Kementerian Sekretariat Negara">
+      <option value="Pusat Pembinaan Penerjemah">
+      <option value="Pusat Pembinaan Analis Kerja Sama">
+      <option value="Biro Data dan Informasi, Sekretariat Dewan Pertimbangan Presiden">
+      <option value="Biro Umum, Sekretariat Dewan Pertimbangan Presiden">
+      <option value="Sekretariat Kantor Staf Presiden">
+      <option value="Sekretariat Kantor Komunikasi Kepresidenan">
+      <option value="Sekretariat Dewan Ekonomi Nasional">
+      <option value="Sekretariat Badan Pengendalian Pembangunan dan Investigasi Khusus">
+      <option value="Pusat Pengelolaan Komplek Gelora Bung Karno">
+      <option value="PPK Kemayoran">
+      <option value="Pusat Pengembangan Kompetensi Aparatur Sipil Negara">
+    </datalist>
     <button class="btn-start" id="btn-start" disabled onclick="startForm()">Mulai Skrining →</button>
   </div>
 </div>
@@ -247,7 +336,7 @@
 // ── DATA ──────────────────────────────────────────────────────────────
 const SECTIONS = [
   {
-    id: "k10", label: "Bagian A", color: "#1F4E79", light: "#DEEAF1",
+    id: "k10", label: "Bagian A", color: "#1a4a7a", light: "#d0e8f4",
     title: "Kondisi Psikologis Umum",
     subtitle: "Dalam 4 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut?",
     scale: ["Tidak pernah","Jarang","Kadang-kadang","Sering","Selalu"],
@@ -295,7 +384,7 @@ const SECTIONS = [
       :            { label:"Prioritas Utama", color:"#dc2626", desc:"Kondisi memerlukan perhatian segera. Sangat disarankan untuk menemui Konselor SDM secepatnya." }
   },
   {
-    id: "gad7", label: "Bagian C", color: "#6b21a8", light: "#f3e8ff",
+    id: "gad7", label: "Bagian C", color: "#1a5a8a", light: "#c8e0f4",
     title: "Ketenangan dan Kekhawatiran",
     subtitle: "Dalam 2 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut?",
     scale: ["Tidak pernah","Kadang-kadang","Sering","Hampir setiap hari"],
@@ -443,9 +532,9 @@ function selectAnswer(secId, key, idx) {
     if(!btn) return;
     if(si === idx) {
       btn.classList.add("selected");
-      btn.style.background   = sec.color;
-      btn.style.borderColor  = sec.color;
-      btn.style.color        = "#fff";
+      btn.style.background   = '#fdf6dc';
+      btn.style.borderColor  = '#d4af37';
+      btn.style.color        = "#1a3a5c";
     } else {
       btn.classList.remove("selected");
       btn.style.background  = "";
@@ -571,147 +660,22 @@ function showResult() {
 
 function resetAll() {
   answers = {}; identity = { nama:"", nip:"", unit:"" }; activeSec = 0;
-  ["inp-nama","inp-nip"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("inp-unit-search").value = "";
-  document.getElementById("inp-unit").value = "";
+  ["inp-nama","inp-nip","inp-unit"].forEach(id => document.getElementById(id).value = "");
   document.getElementById("btn-start").disabled      = true;
   document.getElementById("page-result").style.display = "none";
   document.getElementById("page-intro").style.display  = "flex";
   window.scrollTo({ top:0 });
 }
 
-// ── UNIT KERJA DATA ───────────────────────────────────────────────────
-const UNITS = [
-  "Biro Perencanaan, Sekretariat Kementerian",
-  "Biro Keuangan, Sekretariat Kementerian",
-  "Biro Tata Usaha dan Dukungan Pimpinan, Sekretariat Kementerian",
-  "Biro Kerja Sama Teknik Luar Negeri, Sekretariat Kementerian",
-  "Biro Hubungan Masyarakat, Sekretariat Kementerian",
-  "Biro Pengelolaan Barang Milik Negara dan Pengadaan Barang dan Jasa, Sekretariat Kementerian",
-  "Biro Umum, Sekretariat Kementerian",
-  "Biro Administrasi, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden",
-  "Biro Pengelolaan Istana, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden",
-  "Biro Umum, Deputi Bidang Administrasi dan Pengelolaan Istana, Sekretariat Presiden",
-  "Biro Protokol, Deputi Bidang Protokol, Pers, dan Media, Sekretariat Presiden",
-  "Biro Pers, Media, dan Informasi, Deputi Bidang Protokol, Pers, dan Media, Sekretariat Presiden",
-  "Istana Kepresidenan Bogor, Sekretariat Presiden",
-  "Istana Kepresidenan Cipanas, Sekretariat Presiden",
-  "Istana Kepresidenan Yogyakarta, Sekretariat Presiden",
-  "Istana Kepresidenan Tampaksiring, Sekretariat Presiden",
-  "Asisten Deputi Ekonomi, Keuangan, dan Transformasi Digital, Sekretariat Wakil Presiden",
-  "Asisten Deputi Industri, Perdagangan, Pariwisata, dan Ekonomi Kreatif, Sekretariat Wakil Presiden",
-  "Asisten Deputi Infrastruktur, Sumber Daya Alam, dan Pembangunan Kewilayahan, Sekretariat Wakil Presiden",
-  "Asisten Deputi Pengentasan Kemiskinan dan Pembangunan Desa, Sekretariat Wakil Presiden",
-  "Asisten Deputi Kesehatan, Gizi, dan Pembangunan Keluarga, Sekretariat Wakil Presiden",
-  "Asisten Deputi Pemberdayaan Masyarakat dan Penanggulangan Bencana, Sekretariat Wakil Presiden",
-  "Asisten Deputi Pendidikan, Agama, Kebudayaan, Pemuda, dan Olahraga, Sekretariat Wakil Presiden",
-  "Asisten Deputi Hubungan Luar Negeri dan Pertahanan, Sekretariat Wakil Presiden",
-  "Asisten Deputi Politik, Keamanan, Hukum, dan Hak Asasi Manusia, Sekretariat Wakil Presiden",
-  "Asisten Deputi Tata Kelola Pemerintahan dan Percepatan Pembangunan Daerah, Sekretariat Wakil Presiden",
-  "Biro Tata Usaha dan Sumber Daya Manusia, Deputi Bidang Administrasi, Sekretariat Wakil Presiden",
-  "Biro Perencanaan dan Keuangan, Deputi Bidang Administrasi, Sekretariat Wakil Presiden",
-  "Biro Umum, Deputi Bidang Administrasi, Sekretariat Wakil Presiden",
-  "Biro Protokol dan Kerumahtanggaan, Deputi Bidang Administrasi, Sekretariat Wakil Presiden",
-  "Biro Pers, Media, dan Informasi, Deputi Bidang Administrasi, Sekretariat Wakil Presiden",
-  "Biro Personel TNI dan Kepolisian, Sekretariat Militer Presiden",
-  "Biro Pengamanan, Sekretariat Militer Presiden",
-  "Biro Gelar, Tanda Jasa, dan Tanda Kehormatan, Sekretariat Militer Presiden",
-  "Biro Umum, Sekretariat Militer Presiden",
-  "Asisten Deputi Politik, Pemerintahan Dalam Negeri dan Aparatur Negara, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Hukum, HAM, Imigrasi, dan Pemasyarakatan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Hubungan Luar Negeri, Komunikasi, dan Digital, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Pertahanan dan Keamanan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Energi, Sumber Daya Mineral, dan Pariwisata, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Ketenagakerjaan, Investasi, dan Hilirisasi, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Perdagangan dan Perindustrian, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Perencanaan Pembangunan, Fiskal, dan Pengembangan BUMN, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Kesehatan, Kependudukan, Pemuda, dan Olahraga, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Agama, Kebudayaan, Pendidikan, Sains, dan Teknologi, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Sosial, Pekerja Migran, Pemberdayaan Perempuan, dan Perlindungan Anak, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Desa, Pembangunan Daerah Tertinggal, Koperasi, dan UMKM, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Kelautan, Perikanan, dan Kehutanan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Agraria, Tata Ruang, Transmigrasi, dan Lingkungan Hidup, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Pekerjaan Umum, Perumahan, dan Perhubungan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Pertanian, Pangan, dan Gizi, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Penyelenggaraan Persidangan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Pelaporan Persidangan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Naskah dan Penerjemahan, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Dokumentasi, Diseminasi, dan Arsip, Sekretariat Dukungan Kabinet",
-  "Biro Pengelolaan Anggaran, SDM, dan Kinerja, Sekretariat Dukungan Kabinet",
-  "Biro Dukungan Aparatur dan Kelembagaan, Sekretariat Dukungan Kabinet",
-  "Biro Umum, Sekretariat Dukungan Kabinet",
-  "Asisten Deputi Keamanan, Kelembagaan, dan Aparatur, Deputi Bidang Perundang-undangan dan Administrasi Hukum",
-  "Asisten Deputi Politik, Hukum, dan Pemerintahan Dalam Negeri, Deputi Bidang Perundang-undangan dan Administrasi Hukum",
-  "Asisten Deputi Perekonomian, Deputi Bidang Perundang-undangan dan Administrasi Hukum",
-  "Asisten Deputi Kesejahteraan Rakyat, Deputi Bidang Perundang-undangan dan Administrasi Hukum",
-  "Asisten Deputi Administrasi Hukum, Deputi Bidang Perundang-undangan dan Administrasi Hukum",
-  "Asisten Deputi Hubungan Lembaga Negara dan Lembaga Pemerintah, Deputi Bidang Hubungan Kelembagaan",
-  "Asisten Deputi Hubungan Lembaga Non Pemerintah, Deputi Bidang Hubungan Kelembagaan",
-  "Asisten Deputi Pengaduan Masyarakat, Deputi Bidang Hubungan Kelembagaan",
-  "Asisten Deputi Kajian Strategis dan Pengelolaan Kemitraan, Deputi Bidang Hubungan Kelembagaan",
-  "Biro Administrasi Pejabat Negara, Deputi Bidang Administrasi Aparatur",
-  "Biro Administrasi Pejabat Pemerintahan, Deputi Bidang Administrasi Aparatur",
-  "Biro Sumber Daya Manusia, Deputi Bidang Administrasi Aparatur",
-  "Biro Organisasi, Tata Laksana, Hukum, dan Reformasi Birokrasi, Deputi Bidang Administrasi Aparatur",
-  "Pusat Pengembangan dan Layanan Sistem Informasi, Badan Teknologi, Data, dan Informasi",
-  "Pusat Infrastruktur Sistem Jaringan dan Keamanan Siber, Badan Teknologi, Data, dan Informasi",
-  "Pusat Manajemen Data dan Transformasi Digital, Badan Teknologi, Data, dan Informasi",
-  "Inspektorat, Kementerian Sekretariat Negara",
-  "Pusat Pembinaan Penerjemah",
-  "Pusat Pembinaan Analis Kerja Sama",
-  "Biro Data dan Informasi, Sekretariat Dewan Pertimbangan Presiden",
-  "Biro Umum, Sekretariat Dewan Pertimbangan Presiden",
-  "Sekretariat Kantor Staf Presiden",
-  "Sekretariat Kantor Komunikasi Kepresidenan",
-  "Sekretariat Dewan Ekonomi Nasional",
-  "Sekretariat Badan Pengendalian Pembangunan dan Investigasi Khusus",
-  "Pusat Pengelolaan Komplek Gelora Bung Karno",
-  "PPK Kemayoran",
-  "Pusat Pengembangan Kompetensi Aparatur Sipil Negara",
-];
 
-let unitDropOpen = false;
 
-document.addEventListener("click", function(e) {
-  const search = document.getElementById("inp-unit-search");
-  const drop = document.getElementById("unit-dropdown");
-  if (!search || !drop) return;
-  if (!search.contains(e.target) && !drop.contains(e.target)) {
-    drop.style.display = "none";
-    unitDropOpen = false;
-  }
-});
 
-function showUnitDrop() {
-  renderUnitDrop(UNITS);
-}
 
-function filterUnit() {
-  const q = document.getElementById("inp-unit-search").value.toLowerCase();
-  document.getElementById("inp-unit").value = ""; // reset hidden
-  checkIntro();
-  const filtered = q.length === 0 ? UNITS : UNITS.filter(u => u.toLowerCase().includes(q));
-  renderUnitDrop(filtered);
-}
 
-function renderUnitDrop(list) {
-  const drop = document.getElementById("unit-dropdown");
-  drop.style.display = list.length ? "block" : "none";
-  drop.innerHTML = list.map(u =>
-    `<div onclick="selectUnit(${JSON.stringify(u)})"
-      style="padding:10px 14px;font-size:13px;color:#e2e8f0;cursor:pointer;border-bottom:1px solid rgba(255,255,255,0.06);line-height:1.4;"
-      onmouseover="this.style.background='rgba(255,255,255,0.1)'"
-      onmouseout="this.style.background=''"
-    >${u}</div>`
-  ).join("");
-}
 
-function selectUnit(unit) {
-  document.getElementById("inp-unit-search").value = unit;
-  document.getElementById("inp-unit").value = unit;
-  document.getElementById("unit-dropdown").style.display = "none";
-  checkIntro();
-}
+
+
+
 
 
 
