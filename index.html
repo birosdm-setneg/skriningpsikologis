@@ -166,6 +166,44 @@ body { font-family:'Segoe UI',Arial,sans-serif; background:var(--white); color:v
   background:var(--white); border:1px solid var(--blue-100); border-radius:10px;
   padding:12px 16px; margin-bottom:18px; font-size:11px; color:var(--text-sm); line-height:1.6;
 }
+
+/* ── REVIEW ─────────────────────────────────────────────── */
+.review-card {
+  background:var(--white); border-radius:14px; padding:20px 22px;
+  margin-bottom:12px; border:1.5px solid var(--blue-100);
+  box-shadow:0 2px 8px rgba(13,43,80,.05);
+}
+.review-title { font-size:14px; font-weight:700; color:var(--blue-900); margin-bottom:4px; }
+.review-sub   { font-size:12px; color:var(--text-sm); margin-bottom:16px; line-height:1.5; }
+.review-row   { margin-bottom:14px; }
+.review-label { font-size:12px; font-weight:600; color:var(--text-bd); margin-bottom:7px; }
+.star-row     { display:flex; gap:8px; }
+.star-btn {
+  font-size:26px; background:none; border:none; cursor:pointer;
+  transition:transform .15s; line-height:1; padding:0;
+  filter:grayscale(1) opacity(.3);
+}
+.star-btn.lit { filter:none; }
+.star-btn:hover { transform:scale(1.2); filter:none; }
+.review-textarea {
+  width:100%; background:var(--blue-50); border:1.5px solid var(--blue-100);
+  border-radius:8px; padding:10px 12px; font-size:13px; color:var(--text-hd);
+  font-family:inherit; resize:vertical; min-height:80px; outline:none; transition:border .2s;
+}
+.review-textarea:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(212,175,55,.12); }
+.review-textarea::placeholder { color:var(--blue-300); }
+.btn-submit-review {
+  width:100%; padding:13px; border:none; border-radius:10px;
+  background:linear-gradient(135deg,var(--gold),#F5D060); color:var(--blue-900);
+  font-size:14px; font-weight:700; cursor:pointer; font-family:inherit;
+  box-shadow:0 4px 14px rgba(212,175,55,.3); transition:all .2s; margin-bottom:0;
+}
+.btn-submit-review:disabled { background:var(--blue-100); color:var(--blue-300); cursor:not-allowed; box-shadow:none; }
+.review-sent {
+  text-align:center; padding:20px 10px;
+  font-size:14px; color:#16a34a; font-weight:600; line-height:1.6;
+}
+
 .print-btn {
   width:100%; padding:12px; background:var(--white); color:var(--blue-700);
   border:1.5px solid var(--blue-100); border-radius:10px;
@@ -181,7 +219,7 @@ body { font-family:'Segoe UI',Arial,sans-serif; background:var(--white); color:v
 @media print {
   #page-intro,#page-form { display:none !important; }
   #page-result { display:block !important; }
-  .btn-reset,.print-btn { display:none; }
+  .btn-reset,.print-btn,.review-card { display:none; }
 }
 </style>
 </head>
@@ -340,13 +378,36 @@ body { font-family:'Segoe UI',Arial,sans-serif; background:var(--white); color:v
       <strong style="color:var(--text-hd)">Catatan:</strong> Hasil ini merupakan skrining awal, bukan diagnosis klinis.
       Data Anda dijaga kerahasiaannya dan hanya diakses oleh petugas yang berwenang di Biro SDM Kementerian Sekretariat Negara.
     </div>
+
+    <!-- REVIEW SECTION -->
+    <div class="review-card" id="review-section">
+      <div class="review-title">💬 Masukan Anda</div>
+      <div class="review-sub">Bantu kami memperbaiki skrining ini — hanya butuh 1 menit. Beri bintang untuk setiap aspek, lalu kirim.</div>
+      <div class="review-row">
+        <div class="review-label">Kemudahan penggunaan</div>
+        <div class="star-row" id="stars-ux"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Kejelasan pertanyaan</div>
+        <div class="star-row" id="stars-soal"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Tampilan web</div>
+        <div class="star-row" id="stars-tampilan"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Saran atau masukan <span style="font-weight:400;color:var(--text-sm)">(opsional)</span></div>
+        <textarea class="review-textarea" id="review-saran" placeholder="Tulis saran atau masukan Anda di sini..."></textarea>
+      </div>
+      <button class="btn-submit-review" id="btn-submit-review" onclick="submitReview()" disabled>Kirim Masukan</button>
+    </div>
+
     <button class="print-btn" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
     <button class="btn-reset" onclick="resetAll()">Kembali ke Halaman Awal</button>
   </div>
 </div>
 
 <script>
-
 // ── DATA ──────────────────────────────────────────────────────────────
 const SECTIONS = [
   {
@@ -445,7 +506,7 @@ function answeredCount()     { return Object.keys(answers).length; }
 function secAnswered(sec)    { return sec.questions.every((_,qi) => answers[sec.id+"_"+qi] !== undefined); }
 function secAnsweredCount(s) { return s.questions.filter((_,qi) => answers[s.id+"_"+qi] !== undefined).length; }
 
-// ── RENDER SECTION (full re-render, only on section change) ───────────
+// ── RENDER SECTION ────────────────────────────────────────────────────
 function renderSection() {
   const sec = SECTIONS[activeSec];
   updateHeader();
@@ -454,10 +515,8 @@ function renderSection() {
   const body = document.getElementById("form-body");
   body.innerHTML = "";
 
-  // Banner
   const banner = document.createElement("div");
   banner.className = "section-banner";
-  banner.style.background = 'var(--blue-700)';
   banner.innerHTML = `
     <div class="section-banner-tag">${sec.label}</div>
     <div class="section-banner-title">${sec.title}</div>
@@ -467,21 +526,18 @@ function renderSection() {
   `;
   body.appendChild(banner);
 
-  // Questions
   sec.questions.forEach((q, qi) => {
     const key  = sec.id+"_"+qi;
     const val  = answers[key];
     const card = document.createElement("div");
-    card.className = "question-card";
+    card.className = "question-card" + (val !== undefined ? " answered" : "");
     card.id = "card-"+key;
-    if(val !== undefined) { card.classList.add('answered'); }
 
     const btnsHtml = sec.scale.map((lbl,si) => {
       const selected = val === si;
       return `<button
-        class="answer-btn${selected?" selected":""}"
+        class="answer-btn${selected ? " selected" : ""}"
         id="btn-${key}-${si}"
-        style="${selected ? `background:${sec.color};border-color:${sec.color};` : ""}"
         onclick="selectAnswer('${sec.id}','${key}',${si})"
       ><span class="answer-btn-score">${sec.scaleStart+si}</span>
        <span class="answer-btn-label">${lbl}</span></button>`;
@@ -496,7 +552,6 @@ function renderSection() {
     body.appendChild(card);
   });
 
-  // Nav
   const nav    = document.createElement("div");
   nav.className = "form-nav";
   nav.id        = "form-nav";
@@ -505,65 +560,53 @@ function renderSection() {
   const allDone = answeredCount() === TOTAL_Q;
 
   if(activeSec > 0) {
-    const back    = document.createElement("button");
+    const back = document.createElement("button");
     back.className = "btn-back";
     back.textContent = "← Kembali";
-    back.onclick  = () => { activeSec--; renderSection(); window.scrollTo({top:0}); };
+    back.onclick = () => { activeSec--; renderSection(); window.scrollTo({top:0}); };
     nav.appendChild(back);
   }
 
-  const next    = document.createElement("button");
+  const next = document.createElement("button");
   next.className = "btn-next";
-  next.id        = "btn-next";
-  next.disabled  = isLast ? !allDone : !canNext;
-
+  next.id = "btn-next";
+  next.disabled = isLast ? !allDone : !canNext;
   if(!isLast) {
-    next.textContent    = "Lanjut ke Bagian Berikutnya →";
-    next.style.background = '';
+    next.textContent = "Lanjut ke Bagian Berikutnya →";
     next.onclick = () => { activeSec++; renderSection(); window.scrollTo({top:0}); };
   } else {
-    next.textContent    = allDone ? "Lihat Hasil Skrining ✓" : `Selesaikan semua pertanyaan (${answeredCount()}/${TOTAL_Q})`;
-    next.style.background = '';
+    next.textContent = allDone ? "Lihat Hasil Skrining ✓" : `Selesaikan semua pertanyaan (${answeredCount()}/${TOTAL_Q})`;
     next.onclick = () => { if(allDone) showResult(); };
   }
   nav.appendChild(next);
   body.appendChild(nav);
-
-  // Scroll to top only on section change
   window.scrollTo({ top:0, behavior:"smooth" });
 }
 
-// ── SELECT ANSWER — updates DOM in-place, NO scroll ───────────────────
+// ── SELECT ANSWER ─────────────────────────────────────────────────────
 function selectAnswer(secId, key, idx) {
   answers[key] = idx;
   const sec = SECTIONS.find(s => s.id === secId);
 
-  // Update button styles in this question only
   sec.scale.forEach((_,si) => {
     const btn = document.getElementById("btn-"+key+"-"+si);
     if(!btn) return;
     if(si === idx) {
       btn.classList.add("selected");
-      btn.classList.add('selected'); btn.style.background=''; btn.style.borderColor='';
-      
-      
     } else {
       btn.classList.remove("selected");
-      btn.style.background  = "";
+      btn.style.background = "";
       btn.style.borderColor = "";
-      btn.style.color       = "";
+      btn.style.color = "";
     }
   });
 
-  // Update card border
   const card = document.getElementById("card-"+key);
-  if(card) { card.classList.add('answered'); card.style.borderColor=''; }
+  if(card) card.classList.add("answered");
 
-  // Update header count & progress
   updateHeader();
   updateTabs();
 
-  // Update next button state
   const isLast  = activeSec === SECTIONS.length - 1;
   const canNext = secAnswered(sec);
   const allDone = answeredCount() === TOTAL_Q;
@@ -571,10 +614,8 @@ function selectAnswer(secId, key, idx) {
   if(nextBtn) {
     if(!isLast) {
       nextBtn.disabled = !canNext;
-      nextBtn.style.background = '';
     } else {
       nextBtn.disabled = !allDone;
-      nextBtn.style.background = '';
       nextBtn.textContent = allDone ? "Lihat Hasil Skrining ✓" : `Selesaikan semua pertanyaan (${answeredCount()}/${TOTAL_Q})`;
     }
   }
@@ -596,9 +637,9 @@ function updateTabs() {
   if(!tabs) return;
   tabs.innerHTML = "";
   SECTIONS.forEach((s,i) => {
-    const tab   = document.createElement("div");
+    const tab = document.createElement("div");
     tab.className = "section-tab";
-    tab.style.background = i === activeSec ? "var(--gold)" : secAnswered(s) ? "var(--gold-lt)" : "var(--blue-100)"; tab.style.border = i === activeSec ? "1px solid var(--gold-dk)" : "none";
+    tab.style.background = i === activeSec ? "var(--gold)" : secAnswered(s) ? "var(--blue-300)" : "var(--blue-100)";
     tab.onclick = () => { activeSec = i; renderSection(); };
     tabs.appendChild(tab);
   });
@@ -616,6 +657,7 @@ function showResult() {
   document.getElementById("page-form").style.display   = "none";
   document.getElementById("page-result").style.display = "block";
   window.scrollTo({ top:0 });
+  setTimeout(initReview, 80);
 
   document.getElementById("res-name").textContent = identity.nama + " · " + identity.unit;
   document.getElementById("res-date").textContent =
@@ -630,12 +672,11 @@ function showResult() {
     const score  = getScore(sec);
     const result = sec.interpret(score);
     allScores.push({ score, label: result.label });
-    const pct    = Math.round((score - sec.minScore) / (sec.maxScore - sec.minScore) * 100);
-    if(result.label === "Perlu Dukungan" || result.label === "Butuh Penanganan" || result.label === "Prioritas Utama") anyBad = true;
+    const pct = Math.round((score - sec.minScore) / (sec.maxScore - sec.minScore) * 100);
+    if(["Perlu Dukungan","Butuh Penanganan","Prioritas Utama"].includes(result.label)) anyBad = true;
 
     const card = document.createElement("div");
     card.className = "score-card";
-    card.style.borderColor = sec.color+"30";
     card.innerHTML = `
       <div class="score-card-top">
         <div>
@@ -657,10 +698,11 @@ function showResult() {
   });
 
   submitData(allScores);
+
   const note = document.getElementById("result-note");
   if(anyBad) {
-    note.style.background   = "#fef2f2";
-    note.style.borderColor  = "#fecaca";
+    note.style.background  = "#fef2f2";
+    note.style.borderColor = "#fecaca";
     note.innerHTML = `
       <div class="result-note-title" style="color:#dc2626">⚠️ Tindak Lanjut Disarankan</div>
       <div class="result-note-text">Berdasarkan hasil skrining, Anda disarankan untuk berkonsultasi dengan Konselor SDM di Biro SDM Kementerian Sekretariat Negara. Konsultasi bersifat <strong>rahasia</strong> dan <strong>sukarela</strong>.</div>`;
@@ -673,13 +715,16 @@ function showResult() {
   }
 }
 
+// ── SUBMIT DATA ───────────────────────────────────────────────────────
+const GAS_URL = "https://script.google.com/macros/s/AKfycbwCb56SMl26AnN_wdZgy5B0Lb6Sq_yDBMHZW0HUmFIGH7F8ymqxiWO3Ff_z_YPK75OX/exec";
+
 async function submitData(scores) {
   try {
-    await fetch("https://script.google.com/macros/s/AKfycbwCb56SMl26AnN_wdZgy5B0Lb6Sq_yDBMHZW0HUmFIGH7F8ymqxiWO3Ff_z_YPK75OX/exec", {
-      method: "POST",
-      mode: "no-cors",
+    await fetch(GAS_URL, {
+      method: "POST", mode: "no-cors",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
+        type:   "skrining",
         nama:   identity.nama,
         nip:    identity.nip,
         unit:   identity.unit,
@@ -688,33 +733,111 @@ async function submitData(scores) {
         skor_c: scores[2].score, kat_c: scores[2].label,
       })
     });
-  } catch(e) {
-    console.warn("Gagal kirim data:", e);
+  } catch(e) { console.warn("Gagal kirim data:", e); }
+}
+
+// ── REVIEW ────────────────────────────────────────────────────────────
+const reviewRatings = { ux:0, soal:0, tampilan:0 };
+
+function initReview() {
+  reviewRatings.ux = 0; reviewRatings.soal = 0; reviewRatings.tampilan = 0;
+  initStars("stars-ux",       "ux");
+  initStars("stars-soal",     "soal");
+  initStars("stars-tampilan", "tampilan");
+  const btn = document.getElementById("btn-submit-review");
+  if(btn) btn.disabled = true;
+  const ta = document.getElementById("review-saran");
+  if(ta) ta.value = "";
+  const sec = document.getElementById("review-section");
+  if(sec) sec.innerHTML = sec.innerHTML; // reset if re-shown
+  // Re-render properly
+  const rs = document.getElementById("review-section");
+  if(rs) {
+    rs.innerHTML = `
+      <div class="review-title">💬 Masukan Anda</div>
+      <div class="review-sub">Bantu kami memperbaiki skrining ini — hanya butuh 1 menit. Beri bintang untuk setiap aspek, lalu kirim.</div>
+      <div class="review-row">
+        <div class="review-label">Kemudahan penggunaan</div>
+        <div class="star-row" id="stars-ux"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Kejelasan pertanyaan</div>
+        <div class="star-row" id="stars-soal"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Tampilan web</div>
+        <div class="star-row" id="stars-tampilan"></div>
+      </div>
+      <div class="review-row">
+        <div class="review-label">Saran atau masukan <span style="font-weight:400;color:var(--text-sm)">(opsional)</span></div>
+        <textarea class="review-textarea" id="review-saran" placeholder="Tulis saran atau masukan Anda di sini..."></textarea>
+      </div>
+      <button class="btn-submit-review" id="btn-submit-review" onclick="submitReview()" disabled>Kirim Masukan</button>
+    `;
+    initStars("stars-ux",       "ux");
+    initStars("stars-soal",     "soal");
+    initStars("stars-tampilan", "tampilan");
   }
 }
 
+function initStars(containerId, key) {
+  const wrap = document.getElementById(containerId);
+  if(!wrap) return;
+  wrap.innerHTML = "";
+  for(let i = 1; i <= 5; i++) {
+    const btn = document.createElement("button");
+    btn.className = "star-btn";
+    btn.textContent = "★";
+    btn.dataset.val = i;
+    btn.onclick = () => setStars(containerId, key, i);
+    wrap.appendChild(btn);
+  }
+}
+
+function setStars(containerId, key, val) {
+  reviewRatings[key] = val;
+  document.querySelectorAll("#" + containerId + " .star-btn").forEach(b => {
+    b.classList.toggle("lit", parseInt(b.dataset.val) <= val);
+  });
+  const ready = reviewRatings.ux > 0 && reviewRatings.soal > 0 && reviewRatings.tampilan > 0;
+  const btn = document.getElementById("btn-submit-review");
+  if(btn) btn.disabled = !ready;
+}
+
+async function submitReview() {
+  const btn = document.getElementById("btn-submit-review");
+  btn.disabled = true;
+  btn.textContent = "Mengirim...";
+  const saran = document.getElementById("review-saran").value.trim();
+  try {
+    await fetch(GAS_URL, {
+      method: "POST", mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type:            "review",
+        nama:            identity.nama,
+        nip:             identity.nip,
+        unit:            identity.unit,
+        rating_ux:       reviewRatings.ux,
+        rating_soal:     reviewRatings.soal,
+        rating_tampilan: reviewRatings.tampilan,
+        saran:           saran
+      })
+    });
+  } catch(e) { console.warn("Gagal kirim review:", e); }
+  document.getElementById("review-section").innerHTML =
+    '<div class="review-sent">✅ Terima kasih atas masukan Anda!<br><span style="font-size:12px;font-weight:400;color:var(--text-sm)">Masukan Anda sangat membantu pengembangan skrining ini.</span></div>';
+}
+
+// ── RESET ─────────────────────────────────────────────────────────────
 function resetAll() {
   answers = {}; identity = { nama:"", nip:"", unit:"" }; activeSec = 0;
   ["inp-nama","inp-nip","inp-unit"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("btn-start").disabled      = true;
+  document.getElementById("btn-start").disabled       = true;
   document.getElementById("page-result").style.display = "none";
   document.getElementById("page-intro").style.display  = "flex";
   window.scrollTo({ top:0 });
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </body>
 </html>
