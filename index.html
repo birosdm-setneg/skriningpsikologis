@@ -617,9 +617,12 @@ function selectAnswer(secId, key, idx) {
     } else {
       nextBtn.disabled = !allDone;
       nextBtn.textContent = allDone ? "Lihat Hasil Skrining ✓" : `Selesaikan semua pertanyaan (${answeredCount()}/${TOTAL_Q})`;
+      // Fix: re-assign onclick saat allDone baru tercapai
+      if(allDone) {
+        nextBtn.onclick = () => showResult();
+      }
     }
   }
-}
 
 function updateHeader() {
   const sec = SECTIONS[activeSec];
