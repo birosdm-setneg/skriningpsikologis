@@ -252,7 +252,7 @@ body { font-family:'Segoe UI',Arial,sans-serif; background:var(--white); color:v
     <div class="field-label">Unit Kerja</div>
     <input class="field-input" id="inp-unit" type="text" list="unit-list"
       placeholder="Ketik untuk mencari unit kerja..."
-      oninput="checkIntro()" autocomplete="off" style="margin-bottom:12px;">
+      oninput="checkIntro()" onchange="checkIntro()" autocomplete="off" style="margin-bottom:12px;">
     <datalist id="unit-list">
       <option value="Biro Perencanaan, Sekretariat Kementerian">
       <option value="Biro Keuangan, Sekretariat Kementerian">
@@ -623,6 +623,7 @@ function selectAnswer(secId, key, idx) {
       }
     }
   }
+}
 
 function updateHeader() {
   const sec = SECTIONS[activeSec];
