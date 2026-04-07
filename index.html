@@ -402,7 +402,7 @@ body { font-family:'Segoe UI',Arial,sans-serif; background:var(--white); color:v
       <button class="btn-submit-review" id="btn-submit-review" onclick="submitReview()" disabled>Kirim Masukan</button>
     </div>
 
-    <button class="print-btn" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
+
     <button class="btn-reset" onclick="resetAll()">Kembali ke Halaman Awal</button>
   </div>
 </div>
@@ -413,7 +413,7 @@ const SECTIONS = [
   {
     id: "k10", label: "Bagian A", color: "#1a4a7a", light: "#d0e8f4",
     title: "Kondisi Psikologis Umum",
-    subtitle: "Dalam 4 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam konteks pekerjaan Anda?",
+    subtitle: "Dalam 4 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam melakukan pekerjaan di kantor sehari-hari?",
     scale: ["Tidak pernah","Jarang","Kadang-kadang","Sering","Selalu"],
     scaleStart: 1, maxScore: 50, minScore: 10,
     questions: [
@@ -429,15 +429,15 @@ const SECTIONS = [
       "Merasa tidak berharga",
     ],
     interpret: s =>
-      s <= 19 ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Kondisi psikologis Anda dalam batas normal. Pertahankan dengan menjaga keseimbangan antara pekerjaan dan istirahat, menjalin hubungan positif dengan rekan kerja, serta meluangkan waktu untuk aktivitas yang menyenangkan di luar pekerjaan." }
-      : s <= 24 ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada indikasi tekanan psikologis ringan terkait pekerjaan. Perhatikan pola istirahat dan beban kerja Anda. Cobalah berbicara dengan rekan kerja atau atasan bila ada hal yang mengganjal, dan pastikan Anda memiliki waktu pemulihan yang cukup setelah bekerja." }
-      : s <= 29 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada indikasi tekanan psikologis yang cukup berarti dalam pekerjaan Anda. Kondisi ini dapat memengaruhi produktivitas dan kesejahteraan Anda secara keseluruhan. Disarankan untuk berbicara dengan Konselor SDM agar mendapatkan dukungan dan strategi pengelolaan stres yang tepat." }
-      :            { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada indikasi tekanan psikologis yang signifikan. Kondisi ini perlu mendapat perhatian serius. Sangat disarankan untuk segera berkonsultasi dengan Konselor SDM. Anda berhak mendapatkan dukungan — jangan ragu untuk mencari bantuan." }
+      s <= 19 ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Kondisi psikologis Anda secara umum baik. Anda mampu mengelola tekanan sehari-hari dengan cukup baik. Pertahankan dengan menjaga pola tidur yang teratur, rutin berolahraga, dan meluangkan waktu untuk aktivitas yang Anda nikmati di luar pekerjaan." }
+      : s <= 24 ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada indikasi tekanan psikologis ringan. Wajar dialami di tengah kesibukan kerja, namun perlu diwaspadai agar tidak bertambah berat. Coba perhatikan beban kerja Anda, pastikan istirahat cukup, dan luangkan waktu untuk hal-hal yang membuat Anda senang seperti berkumpul dengan orang terdekat atau melakukan hobi." }
+      : s <= 29 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada indikasi tekanan psikologis yang cukup berarti. Kondisi ini bisa membuat Anda merasa kelelahan atau kewalahan dalam menjalani hari. Cobalah untuk tidak menanggung semuanya sendiri — berbagi cerita dengan orang yang dipercaya, atur prioritas pekerjaan, dan pastikan ada waktu pemulihan setiap harinya." }
+      :            { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada indikasi tekanan psikologis yang signifikan. Kondisi ini perlu mendapat perhatian lebih serius. Penting untuk mencari dukungan dari orang-orang di sekitar Anda dan mempertimbangkan untuk berbicara dengan profesional yang dapat membantu." }
   },
   {
     id: "phq9", label: "Bagian B", color: "#1a6b3c", light: "#d1fae5",
     title: "Perasaan dan Aktivitas Sehari-hari",
-    subtitle: "Dalam 2 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam konteks pekerjaan Anda?",
+    subtitle: "Dalam 2 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam melakukan pekerjaan di kantor sehari-hari?",
     scale: ["Tidak pernah","Kadang-kadang","Sering","Hampir setiap hari"],
     scaleStart: 0, maxScore: 27, minScore: 0,
     questions: [
@@ -452,16 +452,16 @@ const SECTIONS = [
       "Memiliki pikiran bahwa Anda lebih baik mati atau muncul keinginan menyakiti diri sendiri",
     ],
     interpret: s =>
-      s <= 4  ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Tidak ada atau minimal gangguan pada perasaan dan aktivitas sehari-hari. Pertahankan kondisi ini dengan menjaga rutinitas positif, seperti olahraga ringan, istirahat cukup, dan menjalin komunikasi yang baik dengan rekan kerja." }
-      : s <= 9  ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada sedikit gangguan pada perasaan dan aktivitas Anda. Perhatikan pola tidur, nafsu makan, dan semangat kerja Anda. Cobalah untuk berbagi cerita dengan orang yang Anda percaya, atau luangkan waktu untuk aktivitas yang Anda nikmati di luar pekerjaan." }
-      : s <= 14 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada gangguan yang cukup berarti pada perasaan dan aktivitas Anda. Kondisi ini dapat memengaruhi produktivitas dan hubungan di tempat kerja. Disarankan untuk segera berkonsultasi dengan Konselor SDM agar mendapatkan dukungan yang tepat." }
-      : s <= 19 ? { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada gangguan yang cukup serius. Anda mungkin mengalami kesulitan menjalankan aktivitas sehari-hari secara optimal. Segera konsultasikan kondisi Anda dengan Konselor SDM untuk mendapatkan penanganan lebih lanjut." }
-      :            { label:"Prioritas Utama", color:"#dc2626", desc:"Kondisi Anda memerlukan perhatian segera. Sangat disarankan untuk menemui Konselor SDM secepatnya. Anda tidak perlu menghadapi ini sendirian — dukungan profesional tersedia untuk membantu Anda." }
+      s <= 4  ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Tidak ada atau minimal gangguan pada perasaan dan aktivitas Anda. Anda tampak mampu menikmati keseharian dengan baik. Pertahankan dengan menjaga koneksi sosial, rutinitas yang sehat, dan apresiasi terhadap hal-hal kecil yang menyenangkan." }
+      : s <= 9  ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada sedikit gangguan pada perasaan atau semangat Anda. Mungkin ada hari-hari di mana motivasi terasa turun atau tidur kurang berkualitas. Coba perhatikan pola tidur dan makan Anda, kurangi paparan hal-hal yang memicu stres, dan cari kegiatan yang bisa membangkitkan semangat kembali." }
+      : s <= 14 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada gangguan yang cukup berarti pada perasaan dan aktivitas Anda. Kondisi ini bisa memengaruhi produktivitas dan cara Anda berinteraksi dengan orang lain. Cobalah untuk lebih aktif bergerak, jaga rutinitas harian, dan jangan ragu untuk berbagi perasaan dengan orang yang Anda percaya." }
+      : s <= 19 ? { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada gangguan yang cukup serius. Anda mungkin merasa sulit untuk menjalani aktivitas sehari-hari seperti biasa. Penting untuk tidak mengabaikan kondisi ini dan segera mencari dukungan dari orang terdekat maupun profesional." }
+      :            { label:"Prioritas Utama", color:"#dc2626", desc:"Kondisi Anda memerlukan perhatian segera. Anda tidak perlu menghadapi ini sendirian — dukungan dari orang-orang di sekitar Anda dan bantuan profesional dapat membuat perbedaan yang berarti." }
   },
   {
     id: "gad7", label: "Bagian C", color: "#2a6a8a", light: "#c8e0f4",
     title: "Ketenangan dan Kekhawatiran",
-    subtitle: "Dalam 2 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam konteks pekerjaan Anda?",
+    subtitle: "Dalam 2 minggu terakhir, seberapa sering Anda mengalami hal-hal berikut ini dalam melakukan pekerjaan di kantor sehari-hari?",
     scale: ["Tidak pernah","Kadang-kadang","Sering","Hampir setiap hari"],
     scaleStart: 0, maxScore: 21, minScore: 0,
     questions: [
@@ -474,10 +474,10 @@ const SECTIONS = [
       "Merasa khawatir bahwa sesuatu yang buruk akan terjadi",
     ],
     interpret: s =>
-      s <= 4  ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Tidak ada atau minimal gangguan ketenangan. Anda mampu mengelola kekhawatiran dengan baik. Pertahankan dengan tetap menjaga keseimbangan antara pekerjaan dan kehidupan pribadi, serta luangkan waktu untuk relaksasi seperti berjalan santai atau melakukan hobi." }
-      : s <= 9  ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada sedikit gangguan ketenangan dalam pekerjaan Anda. Coba terapkan teknik relaksasi sederhana seperti tarik napas dalam, meditasi singkat, atau istirahat sejenak di sela pekerjaan untuk membantu menenangkan pikiran." }
-      : s <= 14 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada gangguan ketenangan yang cukup berarti. Kekhawatiran berlebihan dapat memengaruhi konsentrasi dan kinerja di tempat kerja. Disarankan untuk berkonsultasi dengan Konselor SDM agar mendapatkan strategi pengelolaan kecemasan yang tepat." }
-      :            { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada gangguan ketenangan yang signifikan. Kondisi ini perlu mendapat perhatian serius karena dapat berdampak pada kesehatan fisik dan kualitas kerja Anda. Segera konsultasikan dengan Konselor SDM untuk mendapatkan penanganan yang sesuai." }
+      s <= 4  ? { label:"Kondisi Baik",    color:"#22c55e", desc:"Tingkat kecemasan Anda minimal. Anda mampu menghadapi ketidakpastian dengan cukup tenang. Pertahankan dengan tetap aktif bergerak, menjaga hubungan sosial yang positif, dan meluangkan waktu untuk relaksasi seperti membaca atau berjalan santai." }
+      : s <= 9  ? { label:"Perlu Perhatian", color:"#eab308", desc:"Ada sedikit gangguan ketenangan. Kekhawatiran yang Anda rasakan masih dalam batas wajar namun perlu diperhatikan. Coba terapkan teknik pernapasan dalam, batasi konsumsi berita yang memicu kecemasan, dan fokus pada hal-hal yang bisa Anda kendalikan." }
+      : s <= 14 ? { label:"Perlu Dukungan", color:"#f97316", desc:"Ada gangguan ketenangan yang cukup berarti. Kekhawatiran berlebihan dapat menguras energi dan memengaruhi konsentrasi kerja. Cobalah untuk menuliskan kekhawatiran Anda di jurnal, berbagi dengan orang terdekat, dan latih diri untuk hadir di momen saat ini." }
+      :            { label:"Butuh Penanganan", color:"#ef4444", desc:"Ada gangguan ketenangan yang signifikan. Rasa cemas yang intens ini bisa terasa melelahkan dan mengganggu kehidupan sehari-hari. Penting untuk mencari dukungan — baik dari orang terdekat maupun profesional yang dapat membantu Anda mengelola kecemasan ini." }
   }
 ];
 
@@ -704,12 +704,21 @@ function showResult() {
   submitData(allScores);
 
   const note = document.getElementById("result-note");
-  if(anyBad) {
+  const hasPerluDukungan = allScores.some(s => s.label === "Perlu Dukungan");
+  const hasDarurat = allScores.some(s => ["Butuh Penanganan","Prioritas Utama"].includes(s.label));
+
+  if(hasDarurat) {
     note.style.background  = "#fef2f2";
     note.style.borderColor = "#fecaca";
     note.innerHTML = `
-      <div class="result-note-title" style="color:#dc2626">⚠️ Tindak Lanjut Disarankan</div>
-      <div class="result-note-text">Berdasarkan hasil skrining, Anda disarankan untuk berkonsultasi dengan Konselor SDM di Biro SDM Kementerian Sekretariat Negara. Konsultasi bersifat <strong>rahasia</strong> dan <strong>sukarela</strong>.</div>`;
+      <div class="result-note-title" style="color:#dc2626">⚠️ Tindak Lanjut Diperlukan</div>
+      <div class="result-note-text">Berdasarkan hasil skrining, kondisi Anda memerlukan perhatian lebih. Kami sangat menyarankan Anda untuk segera memanfaatkan layanan konseling pegawai di Biro SDM Kementerian Sekretariat Negara. Konsultasi bersifat <strong>rahasia</strong>, <strong>sukarela</strong>, dan <strong>gratis</strong> — Anda tidak harus menghadapi ini sendirian.</div>`;
+  } else if(hasPerluDukungan) {
+    note.style.background  = "#fff7ed";
+    note.style.borderColor = "#fed7aa";
+    note.innerHTML = `
+      <div class="result-note-title" style="color:#ea580c">⚠️ Tindak Lanjut Disarankan</div>
+      <div class="result-note-text">Berdasarkan hasil skrining, Anda disarankan untuk memanfaatkan layanan konseling pegawai di Biro SDM Kementerian Sekretariat Negara. Tidak perlu khawatir — konsultasi bersifat <strong>rahasia</strong>, <strong>sukarela</strong>, dan <strong>gratis</strong> untuk seluruh pegawai. Anda tidak harus menghadapi ini sendirian 😊</div>`;
   } else {
     note.style.background  = "#f0fdf4";
     note.style.borderColor = "#bbf7d0";
